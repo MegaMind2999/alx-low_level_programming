@@ -2,7 +2,7 @@
 #include <unistd.h>
 /**
  * main - prints in error stream
- * Returns:1
+ * Return:1
  */
 int main(void)
 {
