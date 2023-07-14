@@ -1,7 +1,5 @@
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
-
 /**
  * main - generate a random number between rand_max/2
  *        positve and and negative and check if
@@ -11,17 +9,15 @@
 */
 int main(void)
 {
-	int r;
+	int n;
 
 	srand(time(0));
-	r = rand() - RAND_MAX / 2;
-
-	if (r > 0)
-		printf("%d is positive\n", r);
-	else if (r < 0)
-		printf("%d is negative\n", r);
+	n = rand() - RAND_MAX / 2;
+	if (n > 0)
+		printf("%d is positive\n", n);
+	else if (n < 0)
+		printf("%d is negative\n", n);
 	else
-		printf("%d is zero\n", r);
-
+		printf("%d is zero\n", n);
 	return (0);
 }
