@@ -6,14 +6,12 @@
 */
 int main(void)
 {
-int n = 0;
-int i = 0;
-for (i = 3; i < 1024; i += 3)
+int i, n = 0;
+for (i = 0; i < 1024; i++)
+{
+if ((i % 3) == 0 || (i % 5) == 0)
 n += i;
-
-for (i = 5; i < 1024; i += 5)
-n += i;
-
-printf("%d", n);
+}
+printf("%d", sum);
 return (0);
 }
