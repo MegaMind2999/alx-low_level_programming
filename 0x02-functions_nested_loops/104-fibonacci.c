@@ -36,16 +36,13 @@ j2 %= 10000000000;
 }
 
 printf("%lu%lu", j1, j2);
-
 if (inc != 98)
 printf(", ");
-
 m1 = m3;
 m2 = m4;
 m3 = j1;
 m4 = j2;
 }
-
 printf("\n");
 return (0);
 }
