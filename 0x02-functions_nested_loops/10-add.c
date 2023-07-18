@@ -1,8 +1,8 @@
 #include "main.h"
 /**
 *add - adds two numbers
-*@n:first num
-*@m:second num
+*@i:first num
+*@j:second num
 *Return: the addtion
 */
 int add(int i, int j)
