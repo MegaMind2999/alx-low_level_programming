@@ -2,7 +2,7 @@
 
 /**
  * cap_string - Capitalizes words of a string.
- * @str: The string to be capitalized.
+ * @str: The string to be capitalize.
  *
  * Return: the string.
  */
