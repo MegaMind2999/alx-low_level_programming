@@ -2,7 +2,7 @@
 
 /**
  * _sqrt_recursion2 - internal func to calculate the square root
- * @n: number to calculate the sqaure root
+ * @num: number to calculate the sqaure root
  * @i: itrator
  * Return: the resulting of square root
  */
@@ -25,6 +25,5 @@ int _sqrt_recursion(int n)
 {
 	if (n < 0)
 		return (-1);
-	else
 	return (_sqrt_recursion2(n, 0));
 }
