@@ -24,7 +24,7 @@ int is_prime_number(int n)
 {
 	if (n <= 1)
 		return (0);
-	return (is_primt_number2(n, n - 1));
+	return (is_primt_number2(n, n / 2));
 }
 
 
