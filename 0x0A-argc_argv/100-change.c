@@ -10,7 +10,7 @@
 
 int main(int argc, char **argv)
 {
-	int total, change;
+	int tot, chg;
 
 	if (argc < 2)
 	{
@@ -18,21 +18,21 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	change = atoi(argv[1]);
+	chg = atoi(argv[1]);
 
-	for (total = 0; change > 0; total++)
+	for (tot = 0; chg > 0; tot++)
 	{
-		if (change - 25 >= 0)
-			change = change - 25;
-		else if (change - 10 >= 0)
-			change = change - 10;
-		else if (change - 5 >= 0)
-			change = change - 5;
-		else if (change - 2 >= 0)
-			change = change - 2;
-		else if (change - 1 >= 0)
-			change = change - 1;
+		if (chg - 25 >= 0)
+			chg = chg - 25;
+		else if (chg - 10 >= 0)
+			chg = chg - 10;
+		else if (chg - 5 >= 0)
+			chg = chg - 5;
+		else if (chg - 2 >= 0)
+			chg = chg - 2;
+		else if (chg - 1 >= 0)
+			chg = chg - 1;
 	}
-	printf("%d\n", total);
+	printf("%d\n", tot);
 	return (0);
 }
