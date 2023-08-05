@@ -1,16 +1,16 @@
+#include "main.h"
 #include <stdio.h>
 
 /**
- * main - print the program name
- * @argc: argument counter
- * @argv: argument vector
- *
+ * main - Printing the name of the program
+ * @argc: Number of command line arguments
+ * @argv: Array of contacts
  * Return: 0
  */
 
 int main(int argc, char *argv[])
 {
-	argc++;
-	printf("%s\n", argv[0]);
+	printf("%s\n", argv[0 + argc * 0]);
+
 	return (0);
 }
