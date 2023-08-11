@@ -1,32 +1,37 @@
 #include "main.h"
 
-int get_thelen(char *str);
-char *create_anarray(int size);
-char *loop_zeros(char *str);
-void calc_product(char *prod, char *mult, int digit, int zeroes);
-void summthenums(char *final_prod, char *next_prod, int next_len);
+int find_len(char *str);
+char *create_xarray(int size);
+char *iterate_zeroes(char *str);
+void get_prod(char *prod, char *mult, int digit, int zeroes);
+void add_nums(char *final_prod, char *next_prod, int next_len);
 
 /**
- * get_thelen - Finds the len of a str
- * @str: The str to be measured.
- * Return: The length
+ * find_len - Finds the length of a string.
+ * @str: The string to be measured.
+ *
+ * Return: The length of the string.
  */
-int get_thelen(char *str)
+int find_len(char *str)
 {
-	int legnth = 0;
+	int len = 0;
 
 	while (*str++)
-		legnth++;
+		len++;
 
-	return (legnth);
+	return (len);
 }
 
 /**
- * create_anarray - Creates an array of chars
+ * create_xarray - Creates an array of chars and initializes it with
+ *                 the character 'x'. Adds a terminating null byte.
  * @size: The size of the array to be initialized.
- * Return: A pointer.
+ *
+ * Description: If there is insufficient space, the
+ *              function exits with a status of 98.
+ * Return: A pointer to the array.
  */
-char *create_anarray(int size)
+char *create_xarray(int size)
 {
 	char *array;
 	int index;
@@ -37,7 +42,7 @@ char *create_anarray(int size)
 		exit(98);
 
 	for (index = 0; index < (size - 1); index++)
-		array[index] = 'E';
+		array[index] = 'x';
 
 	array[index] = '\0';
 
@@ -45,11 +50,13 @@ char *create_anarray(int size)
 }
 
 /**
- * loop_zeros - Iterating str until it hits a non-zero number.
- * @str: The string of numbers to be iterate.
- * Return: A pointer to the next non-zero num.
+ * iterate_zeroes - Iterates through a string of numbers containing
+ *                  leading zeroes until it hits a non-zero number.
+ * @str: The string of numbers to be iterate through.
+ *
+ * Return: A pointer to the next non-zero element.
  */
-char *loop_zeros(char *str)
+char *iterate_zeroes(char *str)
 {
 	while (*str && *str == '0')
 		str++;
@@ -60,6 +67,9 @@ char *loop_zeros(char *str)
 /**
  * get_digit - Converts a digit character to a corresponding int.
  * @c: The character to be converted.
+ *
+ * Description: If c is a non-digit, the function
+ *              exits with a status of 98.
  * Return: The converted int.
  */
 int get_digit(char c)
@@ -76,23 +86,25 @@ int get_digit(char c)
 }
 
 /**
- * calc_product - Multiplies a string of numbers by a single digit.
- * @prod: the result.
- * @mult: string of numbers.
- * @digit: single digit.
- * @zeroes: number of leading zeroes.
- * Return: void
+ * get_prod - Multiplies a string of numbers by a single digit.
+ * @prod: The buffer to store the result.
+ * @mult: The string of numbers.
+ * @digit: The single digit.
+ * @zeroes: The necessary number of leading zeroes.
+ *
+ * Description: If mult contains a non-digit, the function
+ *              exits with a status value of 98.
  */
-void calc_product(char *prod, char *mult, int digit, int zeroes)
+void get_prod(char *prod, char *mult, int digit, int zeroes)
 {
-	int len_of_mult, num, tens = 0;
+	int mult_len, num, tens = 0;
 
-	len_of_mult = get_thelen(mult) - 1;
-	mult += len_of_mult;
+	mult_len = find_len(mult) - 1;
+	mult += mult_len;
 
 	while (*prod)
 	{
-		*prod = 'E';
+		*prod = 'x';
 		prod++;
 	}
 
@@ -104,7 +116,7 @@ void calc_product(char *prod, char *mult, int digit, int zeroes)
 		prod--;
 	}
 
-	for (; len_of_mult >= 0; len_of_mult--, mult--, prod--)
+	for (; mult_len >= 0; mult_len--, mult--, prod--)
 	{
 		if (*mult < '0' || *mult > '9')
 		{
@@ -123,12 +135,12 @@ void calc_product(char *prod, char *mult, int digit, int zeroes)
 }
 
 /**
- * summthenums - Adds the numbers stored in two strings.
+ * add_nums - Adds the numbers stored in two strings.
  * @final_prod: The buffer storing the running final product.
  * @next_prod: The next product to be added.
  * @next_len: The length of next_prod.
  */
-void summthenums(char *final_prod, char *next_prod, int next_len)
+void add_nums(char *final_prod, char *next_prod, int next_len)
 {
 	int num, tens = 0;
 
@@ -138,7 +150,7 @@ void summthenums(char *final_prod, char *next_prod, int next_len)
 	while (*(next_prod + 1))
 		next_prod++;
 
-	for (; *final_prod != 'E'; final_prod--)
+	for (; *final_prod != 'x'; final_prod--)
 	{
 		num = (*final_prod - '0') + (*next_prod - '0');
 		num += tens;
@@ -149,7 +161,7 @@ void summthenums(char *final_prod, char *next_prod, int next_len)
 		next_len--;
 	}
 
-	for (; next_len >= 0 && *next_prod != 'E'; next_len--)
+	for (; next_len >= 0 && *next_prod != 'x'; next_len--)
 	{
 		num = (*next_prod - '0');
 		num += tens;
@@ -165,14 +177,17 @@ void summthenums(char *final_prod, char *next_prod, int next_len)
 }
 
 /**
- * main - Multiplies two positive numbers from input.
+ * main - Multiplies two positive numbers.
  * @argv: The number of arguments passed to the program.
- * @argc: An array of the arguments.
- * Return: 0 or 98.
+ * @argc: An array of pointers to the arguments.
+ *
+ * Description: If the number of arguments is incorrect or one number
+ *              contains non-digits, the function exits with a status of 98.
+ * Return: Always 0.
  */
 int main(int argc, char *argv[])
 {
-	char *answer, *next_prod;
+	char *final_prod, *next_prod;
 	int size, index, digit, zeroes = 0;
 
 	if (argc != 3)
@@ -182,34 +197,34 @@ int main(int argc, char *argv[])
 	}
 
 	if (*(argv[1]) == '0')
-		argv[1] = loop_zeros(argv[1]);
+		argv[1] = iterate_zeroes(argv[1]);
 	if (*(argv[2]) == '0')
-		argv[2] = loop_zeros(argv[2]);
+		argv[2] = iterate_zeroes(argv[2]);
 	if (*(argv[1]) == '\0' || *(argv[2]) == '\0')
 	{
 		printf("0\n");
 		return (0);
 	}
 
-	size = get_thelen(argv[1]) + get_thelen(argv[2]);
-	answer = create_anarray(size + 1);
-	next_prod = create_anarray(size + 1);
+	size = find_len(argv[1]) + find_len(argv[2]);
+	final_prod = create_xarray(size + 1);
+	next_prod = create_xarray(size + 1);
 
-	for (index = get_thelen(argv[2]) - 1; index >= 0; index--)
+	for (index = find_len(argv[2]) - 1; index >= 0; index--)
 	{
 		digit = get_digit(*(argv[2] + index));
-		calc_product(next_prod, argv[1], digit, zeroes++);
-		summthenums(answer, next_prod, size - 1);
+		get_prod(next_prod, argv[1], digit, zeroes++);
+		add_nums(final_prod, next_prod, size - 1);
 	}
-	for (index = 0; answer[index]; index++)
+	for (index = 0; final_prod[index]; index++)
 	{
-		if (answer[index] != 'E')
-			putchar(answer[index]);
+		if (final_prod[index] != 'x')
+			putchar(final_prod[index]);
 	}
 	putchar('\n');
 
 	free(next_prod);
-	free(answer);
+	free(final_prod);
 
 	return (0);
 }
