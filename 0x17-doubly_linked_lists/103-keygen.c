@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 	keygen[3] = ((char *)alph)[big_num(argv[1], len)];
 	keygen[4] = ((char *)alph)[mult(argv[1], len)];
 	keygen[5] = ((char *)alph)[rand_char(argv[1])];
-	keygen[6] = (char) NULL;
+	keygen[6] =  NULL;
 	for (ch = 0; keygen[ch]; ch++)
 		printf("%c", keygen[ch]);
 	return (0);
